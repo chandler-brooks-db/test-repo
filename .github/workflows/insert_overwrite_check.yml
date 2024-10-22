@@ -1,0 +1,28 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# This workflow requires that you have an existing account with codescan.io
+# For more information about configuring your workflow,
+# read our documentation at https://github.com/codescan-io/codescan-scanner-action
+name: InsertOverwriteCheck
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check PR
+      uses: JJ/github-pr-contains-action@releases/v14.1
+      with:
+        bodyDoesNotContain: "INSERT OVERWRITE"
